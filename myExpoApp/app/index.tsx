@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'expo-router';
-import SplashScreen from '../../components/SplashScreen';
+import SplashScreen from './SplashScreen';
 
 export default function Index() {
   const router = useRouter();
 
   useEffect(() => {
     setTimeout(() => {
-      router.push('../login'); // Redirect to login after 3 seconds
+      router.push('/LoginScreen'); // Redirect to login after 3 seconds
     }, 3000);
   }, []);
 

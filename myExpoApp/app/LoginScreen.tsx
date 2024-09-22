@@ -9,12 +9,12 @@ export default function LoginScreen() {
 
   const handleSubmit = () => {
     // Logic for login can be added here
-    router.push('../landing'); // Navigate to landing page after login
+    router.push('/LandingPage'); // Navigate to landing page after login
   };
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/logo.png')} style={styles.logo} />
+      <Image source={require('../assets/images/logo.png')} style={styles.logo} />
       <Text style={styles.title}>LOGIN</Text>
       <TextInput
         style={styles.input}

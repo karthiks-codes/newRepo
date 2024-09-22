@@ -8,12 +8,12 @@ export default function LandingPage() {
   useEffect(() => {
     setTimeout(() => {
       // Navigate to home/dashboard after processing (you can change the route)
-    }, 2000); // 2 seconds delay
+    }, 3000); // 3 seconds delay
   }, []);
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/logo.png')} style={styles.logo} />
+      <Image source={require('../assets/images/logo.png')} style={styles.logo} />
       <Text style={styles.text}>Please Wait ...</Text>
       <Text style={styles.subtext}>We are processing your data...</Text>
     </View>
