@@ -13,7 +13,7 @@ export default function LandingPage() {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/logo.png')} style={styles.logo} />
+      <Image source={require('../assets/images/logo.png')} style={styles.logo} />
       <Text style={styles.text}>Please Wait ...</Text>
       <Text style={styles.subtext}>We are processing your data...</Text>
     </View>

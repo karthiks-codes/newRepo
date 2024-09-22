@@ -14,7 +14,7 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/logo.png')} style={styles.logo} />
+      <Image source={require('../assets/images/logo.png')} style={styles.logo} />
       <Text style={styles.title}>LOGIN</Text>
       <TextInput
         style={styles.input}
