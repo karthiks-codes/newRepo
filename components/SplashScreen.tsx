@@ -4,8 +4,8 @@ import { View, Image, StyleSheet } from 'react-native';
 export default function SplashScreen() {
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/meditation.png')} style={styles.image} />
-      <Image source={require('../assets/logo.png')} style={styles.logo} />
+      <Image source={require('../assets/images/meditation.png')} style={styles.image} />
+      <Image source={require('../assets/images/logo.png')} style={styles.logo} />
     </View>
   );
 }
