@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DFFFE4', // Same background color as Figma
+    backgroundColor: 'F1EAEA', 
   },
   logo: {
     width: 150,

@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginTop: 100, // Adjust this value to position the logo as desired
+    marginTop: 370, // Adjust this value to position the logo as desired
   },
   logo: {
     width: 200, // Adjust width as needed
