@@ -5,14 +5,14 @@ import { StatusBar } from 'expo-status-bar';
 export default function SplashScreen() {
   return (
     <ImageBackground 
-      source={require('../assets/images/meditation.png')} 
+      source={require('../assets/images/meditation-woman.png')} 
       style={styles.backgroundImage}
     >
       <StatusBar style="dark" />
       <SafeAreaView style={styles.container}>
         <View style={styles.logoContainer}>
           <Image 
-            source={require('../assets/images/logo.png')} 
+            source={require('../assets/images/lifeclinic-logo.png')} 
             style={styles.logo} 
           />
         </View>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginTop: 100, // Adjust this value to position the logo as desired
+    marginTop: 50, // Adjust this value to position the logo as desired
   },
   logo: {
     width: 200, // Adjust width as needed
