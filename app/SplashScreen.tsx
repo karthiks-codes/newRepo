@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 export default function SplashScreen() {
   return (
     <ImageBackground 
-      source={require('../assets/images/meditation.png')} 
+      source={require('../assets/images/demo.png')} 
       style={styles.backgroundImage}
     >
       <StatusBar style="dark" />
