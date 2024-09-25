@@ -7,6 +7,7 @@ export default function SplashScreen() {
     <ImageBackground 
       source={require('../assets/images/meditation-woman.png')} 
       style={styles.backgroundImage}
+      blurRadius={3}
     >
       <StatusBar style="dark" />
       <SafeAreaView style={styles.container}>
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
+
   },
   container: {
     flex: 1,
