@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import { BlurView } from 'expo-blur'; // Import from expo-blur
 import { useRouter } from 'expo-router';
 
 export default function LandingPage() {
@@ -13,6 +14,9 @@ export default function LandingPage() {
 
   return (
     <View style={styles.container}>
+      {/* Add a blur effect */}
+      <BlurView intensity={50} style={styles.absolute} />
+
       <Image source={require('../assets/images/logo.png')} style={styles.logo} />
       <Text style={styles.text}>Please Wait ...</Text>
       <Text style={styles.subtext}>We are processing your data...</Text>
@@ -25,7 +29,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DFFFE4', // Same background color as Figma
+    backgroundColor: '#B0D9B1', // Background color
+  },
+  absolute: {
+    ...StyleSheet.absoluteFillObject, // Fills the entire screen
   },
   logo: {
     width: 150,
@@ -35,6 +42,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     marginTop: 20,
+    fontWeight: '600', // Added weight for better readability
+    color: '#333', // Darker color for contrast
   },
   subtext: {
     marginTop: 10,
