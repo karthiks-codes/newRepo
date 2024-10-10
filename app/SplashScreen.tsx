@@ -28,7 +28,7 @@ const SplashScreen: React.FC = () => {
       <ImageBackground
         source={require('../assets/images/meditation.png')}
         style={styles.backgroundImage}
-        blurRadius={3.5}
+        blurRadius={2}
       >
         <StatusBar style="dark" />
         <SafeAreaView style={styles.container}>
