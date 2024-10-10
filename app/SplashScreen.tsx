@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Image, StyleSheet, ImageBackground, SafeAreaView, Animated } from 'react-native';
+import { View, StyleSheet, ImageBackground, SafeAreaView, Animated } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ActivityIndicator, Provider as PaperProvider } from 'react-native-paper';
 
@@ -25,17 +25,17 @@ const SplashScreen: React.FC = () => {
 
   return (
     <PaperProvider>
-      <ImageBackground 
-        source={require('../assets/images/meditation.png')} 
+      <ImageBackground
+        source={require('../assets/images/meditation.png')}
         style={styles.backgroundImage}
         blurRadius={3.5}
       >
         <StatusBar style="dark" />
         <SafeAreaView style={styles.container}>
           <View style={styles.logoContainer}>
-            <Animated.Image 
-              source={require('../assets/images/logo.png')} 
-              style={[styles.logo, { transform: [{ scale: scaleAnim }] }]} 
+            <Animated.Image
+              source={require('../assets/images/logo.png')}
+              style={[styles.logo, { transform: [{ scale: scaleAnim }] }]}
             />
           </View>
           <Animated.View style={[styles.loadingContainer, { opacity: fadeAnim }]}>
@@ -58,18 +58,18 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginTop: 80, // Adjust this value to position the logo as desired
+    marginTop: 80, // Keeping the same margin for logo position
   },
   logo: {
-    width: 200, // Adjust width as needed
-    height: 100, // Adjust height as needed
+    width: 200, // No changes to width
+    height: 100, // No changes to height
     resizeMode: 'contain',
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    marginBottom: 50, // Adjust this value to position the loading indicator as desired
+    marginBottom: 50, // Keeping the same margin for loading indicator
   },
 });
 
