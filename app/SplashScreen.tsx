@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import { View, Image, StyleSheet, ImageBackground, SafeAreaView, ActivityIndicator} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 export default function SplashScreen() {
@@ -15,6 +15,9 @@ export default function SplashScreen() {
             source={require('../assets/images/logo.png')} 
             style={styles.logo} 
           />
+        </View>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#fff" />
         </View>
       </SafeAreaView>
     </ImageBackground>
@@ -32,11 +35,17 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginTop: 100, // Adjust this value to position the logo as desired
+    marginTop: 75, // Adjust this value to position the logo as desired
   },
   logo: {
     width: 200, // Adjust width as needed
     height: 100, // Adjust height as needed
+    marginTop:10,
     resizeMode: 'contain',
+    
+  },
+  loadingContainer: {
+    top:570,   // Adjust this value for the loading spinner's position
+    alignItems: 'center',
   },
 });

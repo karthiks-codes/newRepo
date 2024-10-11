@@ -1,66 +1,112 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
+import { BlurView } from 'expo-blur'; // Required for the blur effect
 
 export default function LoginScreen() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [otp, setOtp] = useState('');
+  const [isOtpSent, setIsOtpSent] = useState(false); // Flag to check if OTP is sent
   const router = useRouter();
 
+  const handleSendOtp = () => {
+    // Logic to send OTP to the phone number
+    setIsOtpSent(true);
+  };
+
   const handleSubmit = () => {
-    // Logic for login can be added here
-    router.push('/LandingPage'); // Navigate to landing page after login
+    // Logic for OTP verification
+    if (otp) {
+      // Logic to verify the OTP can go here
+      // For example, after successful verification:
+      router.push('/LandingPage'); // Navigate to landing page after OTP verification
+    }
   };
 
   return (
-    <View style={styles.container}>
+    <ImageBackground 
+      source={require('../assets/images/meditation-modified.png')} 
+      style={styles.backgroundImage}
+      
+    >
       <Image source={require('../assets/images/logo.png')} style={styles.logo} />
-      <Text style={styles.title}>LOGIN</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <TouchableOpacity>
-        <Text style={styles.forgotPassword}>Forgot password?</Text>
-      </TouchableOpacity>
-      <Button title="Submit" onPress={handleSubmit} color="#28a745" />
-      <TouchableOpacity onPress={() => router.push('../register')}>
-        <Text style={styles.register}>Do not have an account? Register now</Text>
-      </TouchableOpacity>
-    </View>
+      <BlurView intensity={0}  style={styles.blurContainer}>
+        <View style={styles.container}>
+          
+          <Text style={styles.title}>WELCOME</Text>
+          
+          {/* Phone Number Input */}
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your phone number"
+            value={phoneNumber}
+            onChangeText={setPhoneNumber}
+            keyboardType="phone-pad"
+          />
+
+          {/* Conditional rendering of OTP field */}
+          {isOtpSent && (
+            <TextInput
+              style={styles.input}
+              placeholder="Enter OTP"
+              value={otp}
+              onChangeText={setOtp}
+              keyboardType="number-pad"
+            />
+          )}
+
+          {/* Send OTP Button */}
+          {!isOtpSent ? (
+            <Button title="Send OTP" onPress={handleSendOtp} color="#28a745" />
+          ) : (
+            <Button title="Submit" onPress={handleSubmit} color="#28a745" />
+          )}
+
+          
+        </View>
+      </BlurView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundImage: {
     flex: 1,
+    width: '100%',
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DFFFE4', // Background color from Figma
+  },
+  blurContainer: {
+    ...StyleSheet.absoluteFillObject, // Fills the entire screen
+    //flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+   },
+  container: {
+    alignItems: 'center',
+    width: '80%',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Adds a white background to the content box
+    padding: 20,
+    borderRadius: 10,
   },
   logo: {
-    width: 150,
-    height: 80,
+    width: 200, // Adjust width as needed
+    height: 100, // Adjust height as needed
+    marginBottom:550,
     resizeMode: 'contain',
-    marginBottom: 20,
+    
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color:'green',
   },
   input: {
     height: 40,
-    width: '80%',
+    width: '100%',
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 5,
@@ -68,12 +114,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: '#fff',
   },
-  forgotPassword: {
-    color: 'red',
-    marginBottom: 20,
-  },
-  register: {
-    marginTop: 20,
-    color: 'red',
-  },
+  
+  
 });
