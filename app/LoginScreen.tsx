@@ -1,20 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ImageBackground, StyleSheet, SafeAreaView, Image } from 'react-native';
-import { useRouter } from 'expo-router';
-import { Provider as PaperProvider, TextInput, Button, ActivityIndicator } from 'react-native-paper';
+import { View, Text, ImageBackground, StyleSheet, SafeAreaView, Image, ActivityIndicator } from 'react-native';
+import { useRouter } from 'expo-router'; // Assuming you're still using this
+import { Provider as PaperProvider, TextInput, Button } from 'react-native-paper';
+import * as Font from 'expo-font'; // You can keep this if you want to load fonts
 
 export default function LoginScreen() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [fontLoaded, setFontLoaded] = useState(false);
   const router = useRouter();
   
   const [captionText, setCaptionText] = useState('');
   const fullCaption = "Rediscover Life, It Is Yours!";
   const typingSpeed = 150;
 
+  // Load fonts and manage caption typing effect
   useEffect(() => {
+    async function loadFonts() {
+      await Font.loadAsync({
+        'Roboto-Regular': require('../assets/fonts/Roboto-Regular.ttf'),
+        'Roboto-Bold': require('../assets/fonts/Roboto-Bold.ttf'),
+        'Roboto-BoldItalic': require('../assets/fonts/Roboto-BoldItalic.ttf'),
+        'DancingScript-Bold': require('../assets/fonts/DancingScript-Bold.ttf'),
+        'Roboto-Italic': require('../assets/fonts/Roboto-Italic.ttf'),
+      });
+      setFontLoaded(true);
+    }
+    
+    loadFonts();
+
     let index = 0;
     const intervalId = setInterval(() => {
       if (index < fullCaption.length) {
@@ -47,6 +63,11 @@ export default function LoginScreen() {
       setLoading(false);
     }, 2000);
   };
+
+  // Show loading indicator until font is loaded
+  if (!fontLoaded) {
+    return <ActivityIndicator size="large" color="#2ECC71" style={styles.loadingIndicator} />;
+  }
 
   return (
     <PaperProvider>
@@ -156,8 +177,8 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
   },
   caption: {
+    fontFamily: 'Roboto-Italic',
     fontSize: 24,
-    fontWeight: 'bold',
     color: '#333',
     textAlign: 'center',
     marginBottom: 40,
@@ -178,12 +199,13 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
+    fontFamily: 'Roboto-BoldItalic',
     fontSize: 28,
-    fontWeight: 'bold',
     marginBottom: 20,
     color: '#333',
   },
   infoText: {
+    fontFamily: 'Roboto',
     fontSize: 14,
     color: '#666',
     marginBottom: 15,
@@ -194,25 +216,33 @@ const styles = StyleSheet.create({
     width: '100%',
     marginBottom: 15,
     backgroundColor: '#fff',
-  },
-  button: {
-    backgroundColor: '#2ECC71',
-    paddingVertical: 8,
-    paddingHorizontal: 30,
-    borderRadius: 15,
-    width: '80%',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  resendButton: {
-    marginTop: 15,
-  },
-  resendText: {
-    color: '#2ECC71',
-    fontSize: 16,
-    textDecorationLine: 'underline',
-  },
+  
+},
+button:{
+backgroundColor:'#2ECC71',
+paddingVertical :8 ,
+paddingHorizontal :30 ,
+borderRadius :15 ,
+width:'80%'
+},
+buttonText:{
+fontFamily:'Roboto-Bold', // Use Roboto Bold here
+color:'#fff' ,
+fontSize :18 ,
+},
+resendButton:{
+marginTop :15 ,
+},
+resendText:{
+fontFamily:'Roboto-Regular', // Use Roboto Regular here
+color:'#2ECC71',
+fontSize :16 ,
+textDecorationLine :'underline' ,
+},
+loadingIndicator:{
+   flexGrow :1 ,
+   justifyContent :'center' ,
+   alignItems :'center' ,
+   height:'100%' 
+},
 });
