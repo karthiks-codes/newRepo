@@ -42,7 +42,7 @@ export default function LandingPage() {
         <BlurView intensity={50} style={styles.absolute} tint="light" />
         <View style={styles.content}>
           <Image source={require('../assets/images/logo.png')} style={styles.logo} />
-          <Text style={[styles.slogan, { fontFamily: 'Roboto-Italic' }]}>Rediscover Life, It Is Yours!</Text>
+          <Text style={[styles.slogan, { fontFamily: 'Roboto-Regular' }]}>Rediscover Life, It Is Yours!</Text>
           <ActivityIndicator size="large" color="#4CAF50" style={styles.loader} />
           <Text style={[styles.text, { fontFamily: 'Roboto-Regular' }]}>Please Wait ...</Text>
           <Text style={[styles.subtext, { fontFamily: 'Roboto-Regular' }]}>We are processing your data...</Text>
