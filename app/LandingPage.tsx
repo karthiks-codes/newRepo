@@ -8,7 +8,6 @@ import * as Font from 'expo-font'; // Import expo-font
 // Load fonts function
 const loadFonts = async () => {
   await Font.loadAsync({
-    'Roboto-Italic': require('../assets/fonts/Roboto-Italic.ttf'),
     'Roboto-Regular': require('../assets/fonts/Roboto-Regular.ttf'),
   });
 };
