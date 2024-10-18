@@ -1,28 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import { View, StyleSheet, ImageBackground, SafeAreaView, Animated } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, ImageBackground, SafeAreaView, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ActivityIndicator, Provider as PaperProvider } from 'react-native-paper';
 
 const SplashScreen: React.FC = () => {
-  const scaleAnim = useRef(new Animated.Value(0)).current; // For logo scale
-  const fadeAnim = useRef(new Animated.Value(0)).current; // For loading indicator fade-in
-
-  useEffect(() => {
-    // Start animations
-    Animated.parallel([
-      Animated.timing(scaleAnim, {
-        toValue: 1,
-        duration: 2000,
-        useNativeDriver: true,
-      }),
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 2000,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  }, [scaleAnim, fadeAnim]);
-
   return (
     <PaperProvider>
       <ImageBackground
@@ -33,14 +14,14 @@ const SplashScreen: React.FC = () => {
         <StatusBar style="dark" />
         <SafeAreaView style={styles.container}>
           <View style={styles.logoContainer}>
-            <Animated.Image
+            <Image
               source={require('../assets/images/logo.png')}
-              style={[styles.logo, { transform: [{ scale: scaleAnim }] }]}
+              style={styles.logo} // Keeping the original logo size
             />
           </View>
-          <Animated.View style={[styles.loadingContainer, { opacity: fadeAnim }]}>
+          <View style={styles.loadingContainer}>
             <ActivityIndicator animating={true} color="#2ECC71" size="large" />
-          </Animated.View>
+          </View>
         </SafeAreaView>
       </ImageBackground>
     </PaperProvider>
@@ -55,15 +36,17 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    justifyContent: 'center', // Centering content vertically
+    alignItems: 'center', // Centering content horizontally
   },
   logoContainer: {
     alignItems: 'center',
     marginTop: 80, // Keeping the same margin for logo position
   },
   logo: {
-    width: 200, // No changes to width
-    height: 100, // No changes to height
-    resizeMode: 'contain',
+    width: 200, // Original width of the logo
+    height: 100, // Original height of the logo
+    resizeMode: 'contain', // Ensures the logo scales properly without being cut off
   },
   loadingContainer: {
     flex: 1,
