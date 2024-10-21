@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, Image, StyleSheet, ImageBackground, ActivityIndicator } from 'react-native';
+import { View, Text, Image, StyleSheet, ImageBackground} from 'react-native';
 import { useRouter } from 'expo-router';
 import { BlurView } from 'expo-blur';
 
@@ -21,9 +21,6 @@ export default function LandingPage() {
       <BlurView intensity={0} style={styles.blurContainer}>
     <View style={styles.container}>
       <Image source={require('../assets/images/logo.png')} style={styles.logo} />
-      <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#fff" />
-        </View>
       <Text style={styles.text}>Please Wait ...</Text>
       <Text style={styles.subtext}>We are processing your data...</Text>
     </View>
