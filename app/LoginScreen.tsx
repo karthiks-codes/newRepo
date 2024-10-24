@@ -1,79 +1,130 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, Image, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
+import { BlurView } from 'expo-blur';
 
 export default function LoginScreen() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [otp, setOtp] = useState('');
+  const [otpSent, setOtpSent] = useState(false);
   const router = useRouter();
 
+  const handleGetOtp = () => {
+    console.log(`Sending OTP to ${phoneNumber}`);
+    setOtpSent(true);
+  };
+
   const handleSubmit = () => {
-    // Logic for login can be added here
-    router.push('/LandingPage'); // Navigate to landing page after login
+    console.log(`Verifying OTP: ${otp}`);
+    router.push('/LandingPage');
+  };
+
+  const handleResendOtp = () => {
+    console.log(`Resending OTP to ${phoneNumber}`);
   };
 
   return (
-    <View style={styles.container}>
-      <Image source={require('../assets/images/logo.png')} style={styles.logo} />
-      <Text style={styles.title}>LOGIN</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <TouchableOpacity>
-        <Text style={styles.forgotPassword}>Forgot password?</Text>
-      </TouchableOpacity>
-      <Button title="Submit" onPress={handleSubmit} color="#28a745" />
-      <TouchableOpacity onPress={() => router.push('../register')}>
-        <Text style={styles.register}>Do not have an account? Register now</Text>
-      </TouchableOpacity>
-    </View>
+    <ImageBackground 
+      source={require('../assets/images/LoginBackground.png')} 
+      style={styles.container}
+      resizeMode="cover"
+    >
+      <BlurView intensity={50} style={styles.overlay}>
+        <View style={styles.logoContainer}>
+          <Image source={require('../assets/images/logo2.png')} style={styles.logo} />
+        </View>
+        
+        {/* Static text instead of animated text */}
+        <Text style={styles.title}>Rediscover Life, It is Yours!</Text>
+        
+        <TextInput
+          style={styles.input}
+          placeholder="Phone Number"
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+          keyboardType="phone-pad"
+        />
+        
+        {otpSent && (
+          <>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter OTP"
+              value={otp}
+              onChangeText={setOtp}
+              keyboardType="number-pad"
+            />
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+              <Text style={styles.buttonText}>Submit OTP</Text>
+            </TouchableOpacity>
+          </>
+        )}
+        
+        {!otpSent ? (
+          <TouchableOpacity style={styles.button} onPress={handleGetOtp}>
+            <Text style={styles.buttonText}>Get OTP</Text> 
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.button} onPress={handleResendOtp}>
+            <Text style={styles.buttonText}>Resend OTP</Text>
+          </TouchableOpacity>
+        )}
+      </BlurView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  overlay: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DFFFE4', // Background color from Figma
+    padding: 20,
+    backgroundColor: 'transparent',
+  },
+  logoContainer: {
+    marginBottom: 55,
+    marginTop: 0,
   },
   logo: {
-    width: 150,
-    height: 80,
+    width: 250,
+    height: 130,
     resizeMode: 'contain',
-    marginBottom: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    opacity: 0.8,
+    textAlign: 'left',
+    width: '100%',
+    paddingLeft: 20,
   },
   input: {
     height: 40,
-    width: '80%',
+    width: '90%',
     borderColor: 'gray',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 10,
     paddingHorizontal: 10,
     marginBottom: 10,
     backgroundColor: '#fff',
   },
-  forgotPassword: {
-    color: 'red',
-    marginBottom: 20,
+  button: {
+    marginVertical: 5,
+    width: '90%',
+    backgroundColor: '#2E7D32',
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 10,
   },
-  register: {
-    marginTop: 20,
-    color: 'red',
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });

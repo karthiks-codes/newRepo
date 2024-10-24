@@ -1,42 +1,56 @@
-import React from 'react';
-import { View, Image, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import React, { useEffect } from 'react';
+import { View, Image, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function SplashScreen() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Navigate to login screen after 6 seconds (same total duration as before)
+    const timer = setTimeout(() => {
+      router.push('/LoginScreen');
+    }, 6000); // 6-second delay
+
+    // Cleanup the timer on component unmount
+    return () => clearTimeout(timer);
+  }, [router]);
+
   return (
-    <ImageBackground 
-      source={require('../assets/images/meditation.png')} 
-      style={styles.backgroundImage}
-    >
-      <StatusBar style="dark" />
-      <SafeAreaView style={styles.container}>
-        <View style={styles.logoContainer}>
-          <Image 
-            source={require('../assets/images/logo.png')} 
-            style={styles.logo} 
-          />
-        </View>
-      </SafeAreaView>
-    </ImageBackground>
+    <View style={styles.container}>
+      <Image 
+        source={require('../assets/images/meditation.png')} 
+        style={styles.image} 
+      />
+      <Image 
+        source={require('../assets/images/logo.png')} 
+        style={styles.logo} 
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
   container: {
     flex: 1,
-  },
-  logoContainer: {
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 100, // Adjust this value to position the logo as desired
+  },
+  image: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   logo: {
-    width: 200, // Adjust width as needed
-    height: 100, // Adjust height as needed
+    position: 'absolute',
+    top: 0, 
+    width: 250, 
+    height: 250, 
     resizeMode: 'contain',
+    alignSelf: 'center',
   },
 });
